@@ -9,6 +9,17 @@ import static com.xworkz.games.dbconstants.DbConstants.*;
 import com.xworkz.games.dto.GamesDTO;
 
 public class GamesDAO {
+	public static Connection getConnection() throws Exception {
+	    String driver = "com.mysql.jdbc.Driver";
+	    String url = "jdbc:mysql://localhost:3306/jan6";
+	    String username = "root";
+	    String password = "ROOT";
+	    
+	    Connection conn = DriverManager.getConnection(url, username, password);
+		return conn;
+	    
+	}
+	    
 	public static boolean saveGame(GamesDTO dto) {
 		
 		if (dto == null) {
@@ -18,7 +29,8 @@ public class GamesDAO {
 			PreparedStatement preparedStatement = null;
 
 			try {
-				connection = DriverManager.getConnection(JDBCURL, USERNAME, PASSWORD);
+					connection = getConnection();
+				
 				
 				preparedStatement = connection.prepareStatement( "INSERT INTO games VALUES(?,?,?,?)");
 
@@ -30,7 +42,7 @@ public class GamesDAO {
 				preparedStatement.execute();
 				return true;
 
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 
