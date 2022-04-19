@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 import com.xworkz.scannerjdbcpgm.Runner;
 
-public class MovieDAO implements Runner{
+public class MovieDAO implements Runner {
 	Scanner sc = new Scanner(System.in);
-	
+
 	@Override
 	public void insertMovie() {
 
@@ -180,9 +180,8 @@ public class MovieDAO implements Runner{
 
 			while (resultSet.next()) {
 				String movieName = resultSet.getString("name");
-				System.out.println("movie name:"+movieName);
-				
-			
+				System.out.println("movie name:" + movieName);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -200,8 +199,9 @@ public class MovieDAO implements Runner{
 
 		}
 	}
+
 	@Override
-	public  void getAll() {
+	public void getAll() {
 
 		String query = "SELECT * FROM movie ";
 
@@ -246,7 +246,7 @@ public class MovieDAO implements Runner{
 	}
 
 	@Override
-	public  void getLanguageAndBudgetByMovieName(String movieName) {
+	public void getLanguageAndBudgetByMovieName(String movieName) {
 		String query = "SELECT language,budget FROM movie where name=('" + movieName + "')";
 
 		Connection connection = null;
@@ -284,7 +284,5 @@ public class MovieDAO implements Runner{
 
 		}
 	}
-
-
 
 }
