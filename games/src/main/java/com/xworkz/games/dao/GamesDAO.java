@@ -1,27 +1,27 @@
 package com.xworkz.games.dao;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
 
-import static com.xworkz.games.dbconstants.DbConstants.*;
 import com.xworkz.games.dto.GamesDTO;
 
 public class GamesDAO {
-	public static Connection getConnection() throws Exception {
-	    String driver = "com.mysql.jdbc.Driver";
-	    String url = "jdbc:mysql://localhost:3306/jan6";
-	    String username = "root";
-	    String password = "ROOT";
-	    
-	    Connection conn = DriverManager.getConnection(url, username, password);
-		return conn;
-	    
+	public static Properties loadPropertiesFile() throws Exception {
+
+		Properties prop = new Properties();
+		FileInputStream in = new FileInputStream("jdbc.properties");
+		prop.load(in);
+		in.close();
+		return prop;
 	}
-	    
+
 	public static boolean saveGame(GamesDTO dto) {
-		
+		System.out.println("create jdbc connection using properties file ");
+
 		if (dto == null) {
 			return false;
 		} else {
@@ -29,10 +29,18 @@ public class GamesDAO {
 			PreparedStatement preparedStatement = null;
 
 			try {
-					connection = getConnection();
-				
-				
-				preparedStatement = connection.prepareStatement( "INSERT INTO games VALUES(?,?,?,?)");
+				Properties prop = loadPropertiesFile();
+
+				String driverClass = prop.getProperty("driver");
+				String url = prop.getProperty("url");
+				String username = prop.getProperty("username");
+				String password = prop.getProperty("password");
+
+
+
+				connection = DriverManager.getConnection(url, username, password);
+
+				preparedStatement = connection.prepareStatement("INSERT INTO games VALUES(?,?,?,?)");
 
 				preparedStatement.setInt(1, dto.getGameId());
 				preparedStatement.setString(2, dto.getGameName());

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.Scanner;
 
 import com.xworkz.scannerjdbcpgm.Runner;
@@ -130,6 +131,10 @@ public class MovieDAO implements Runner {
 		Connection connection = null;
 		Statement statement = null;
 		try {
+			
+			
+		
+		
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jan6", "root", "ROOT");
 			System.out.println("Connection created");
 
@@ -139,7 +144,7 @@ public class MovieDAO implements Runner {
 			statement.execute("DELETE FROM movie where id=(" + id + ")");
 			System.out.println("successfully deleted");
 
-		} catch (SQLException e) {
+		} catch (SQLException  e) {
 			e.printStackTrace();
 		} finally {
 			// step 6
@@ -210,6 +215,8 @@ public class MovieDAO implements Runner {
 		ResultSet resultSet = null;
 
 		try {
+			
+			
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jan6", "root", "ROOT");
 
 			statement = connection.createStatement();
@@ -243,6 +250,11 @@ public class MovieDAO implements Runner {
 
 		}
 
+	}
+
+	private Properties loadPropertiesFile() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
