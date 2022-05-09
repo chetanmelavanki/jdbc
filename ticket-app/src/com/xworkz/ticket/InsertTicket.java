@@ -1,17 +1,22 @@
-package com.xworkz.jdbc;
+package com.xworkz.ticket;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertQuery {
+import com.xworkz.ticket.properties.DriverProperties;
+
+public class InsertTicket {
 	public static void main(String[] args) {
+
 		try (Connection connection = DriverManager.getConnection(DriverProperties.url.getValue(),
 				DriverProperties.userName.getValue(), DriverProperties.passWord.getValue());
 				Statement statement = connection.createStatement();) {
+			String value=DriverProperties.type.getValue();
+			System.out.println(value);
 
-			String insertQuery = "INSERT INTO bakery VALUES(5,'A 1 Bakery',1969,'gulbarga',20)";
+			String insertQuery = " INSERT INTO ticket(id,row_num,col_number,person,type_) VALUES(10,10,11,'rani','"+value+"') ";
 
 			System.out.println(statement);
 			int rowsEffected = statement.executeUpdate(insertQuery);

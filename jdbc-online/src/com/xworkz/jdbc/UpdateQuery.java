@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertQuery {
+public class UpdateQuery {
 	public static void main(String[] args) {
 		try (Connection connection = DriverManager.getConnection(DriverProperties.url.getValue(),
 				DriverProperties.userName.getValue(), DriverProperties.passWord.getValue());
 				Statement statement = connection.createStatement();) {
 
-			String insertQuery = "INSERT INTO bakery VALUES(5,'A 1 Bakery',1969,'gulbarga',20)";
+			String insertQuery = "Update  bakery set B_NAME='H.V BEKARY' where id =1";
 
 			System.out.println(statement);
 			int rowsEffected = statement.executeUpdate(insertQuery);
